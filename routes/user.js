@@ -10,7 +10,17 @@ router.get("/signup", (req, res) => {
   return res.render("signup");
 });
 
+router.post("/signin",async(req,res)=>{
+  const {email,password}=req.body;
+  const user=await User.matchPassword(email,password);
+
+  console.log('user',user)
+  return res.redirect("/");
+
+})
+
 router.post("/signup", async (req, res) => {
+  console.log("lol",req.body)
   const { fullName, email, password } = req.body;
   await User.create({
     fullName,
@@ -19,5 +29,7 @@ router.post("/signup", async (req, res) => {
   });
   return res.redirect("/");
 });
+
+
 
 module.exports = router;

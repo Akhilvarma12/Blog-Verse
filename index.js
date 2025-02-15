@@ -1,19 +1,26 @@
-const express=require('express');
-const path=require("path");
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
 
-const userRoute=require('./routes/user')
+const userRoute = require("./routes/user");
 
-const app=express();
-const PORT=9000;
+const app = express();
+const PORT = 9000;
 
-app.set("view engine","ejs");
-app.set("views",path.resolve("./views"));
+mongoose
+  .connect("mongodb://localhost:27017/blog")
+  .then(console.log("Mongo DB connected"));
 
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views")); 
 
-app.get('/',(req,res)=>{
-    res.render('home');
-})
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use('/user',userRoute)
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
-app.listen(PORT,()=>console.log(`Server started at port:${PORT}`));
+app.use("/user", userRoute);
+
+app.listen(PORT, () => console.log(`Server started at port:${PORT}`));
