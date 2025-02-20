@@ -24,6 +24,4 @@ const blogSchema = new Schema(
 
 const Blog=model('blog',blogSchema);
 
-module.exports={
-    Blog
-}
+module.exports=Blog
