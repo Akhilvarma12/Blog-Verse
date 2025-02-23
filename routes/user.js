@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const User = require("../models/user");
+ const User = require("../models/user");
+ const { Router } = require("express");
 const router = Router();
 
 router.get("/signin", (req, res) => {
